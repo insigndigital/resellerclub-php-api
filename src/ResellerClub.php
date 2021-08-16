@@ -66,7 +66,7 @@ class ResellerClub
         $guzzleConfig = [
             'base_uri'        => $testMode ? self::API_TEST_URL : self::API_URL,
             'defaults'        => ['query' => $this->authentication],
-            'verify'          => false,
+            'verify'          => true,
             'connect_timeout' => (float)$timeout,
             'timeout'         => (float)$timeout,
         ];
