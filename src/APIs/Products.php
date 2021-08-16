@@ -28,7 +28,7 @@ class Products
     {
         return $this->get('customer-price');
     }
-    
+
     /**
      * Gets the Reseller Slab Pricing
      *
@@ -41,7 +41,7 @@ class Products
     {
         return $this->get('reseller-price');
     }
-    
+
     /**
      * Gets the Reseller's Cost Price
      *
@@ -56,24 +56,94 @@ class Products
     }
 
     /**
+     * Checks the availability of a product for the specified domain name
+     * 
+     * @param string $domainName
+     * @param string $productKey
+     *
+     * @return array|Exception
+     * @throws Exception
+     * @link https://manage.logicboxes.com/kb/node/832
+     */
+    public function available(
+        $domainName,
+        $productKey
+    ) {
+        return $this->get(
+            'availability',
+            [
+                'domain-name' => $domainName,
+                'product-key' => $productKey,
+            ]
+        );
+    }
+
+    /**
+     * Gets the details of the active products
+     *
+     * @return array|Exception
+     * @throws Exception
+     * @link https://manage.logicboxes.com/kb/node/833
+     */
+    public function details()
+    {
+        return $this->get('details');
+    }
+
+    /**
+     * Gets the mapping of product category to product keys
+     *
+     * @return array|Exception
+     * @throws Exception
+     * @link https://manage.logicboxes.com/kb/node/862
+     * @todo Add optional parameters
+     */
+    public function categoryKeysMapping()
+    {
+        return $this->get('category-keys-mapping');
+    }
+
+    /**
+     * Gets the details of the all active product plans of the Reseller
+     * 
+     * @param string $domainName
+     * @param string $productKey
+     *
+     * @return array|Exception
+     * @throws Exception
+     * @link https://manage.logicboxes.com/kb/node/939
+     * @todo Add optional parameters
+     */
+    public function planDetails(
+        $productKey
+    ) {
+        return $this->get(
+            'plan-details',
+            [
+                'product-key' => $productKey,
+            ]
+        );
+    }
+
+    /**
+     * Moves all products from one customer to other customer
+     * 
      * @param string $domainName
      * @param int $existingCustomerId
      * @param int $newCustomerId
-     * @param string $defaultContact
      *
      * @return array|Exception
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/904
      */
-    public function move($domainName, $existingCustomerId, $newCustomerId, $defaultContact = 'oldcontact')
+    public function move($domainName, $existingCustomerId, $newCustomerId)
     {
         return $this->post(
             'move',
             [
                 'domain-name'          => $domainName,
                 'existing-customer-id' => $existingCustomerId,
-                'new-customer-id'      => $newCustomerId,
-                'default-contact'      => $defaultContact,
+                'new-customer-id'      => $newCustomerId
             ]
         );
     }
