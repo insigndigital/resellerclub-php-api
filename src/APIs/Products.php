@@ -28,6 +28,32 @@ class Products
     {
         return $this->get('customer-price');
     }
+    
+    /**
+     * Gets the Reseller Slab Pricing
+     *
+     * @return array|Exception
+     * @throws Exception
+     * @link https://manage.logicboxes.com/kb/node/865
+     * @todo Add optional parameters
+     */
+    public function resellerPrice()
+    {
+        return $this->get('reseller-price');
+    }
+    
+    /**
+     * Gets the Reseller's Cost Price
+     *
+     * @return array|Exception
+     * @throws Exception
+     * @link https://manage.logicboxes.com/kb/node/1029
+     * @todo Add optional parameters
+     */
+    public function resellerCostPrice()
+    {
+        return $this->get('reseller-cost-price');
+    }
 
     /**
      * @param string $domainName
