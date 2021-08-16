@@ -1,20 +1,20 @@
 <?php
 
-namespace habil\ResellerClub;
+namespace HeronSantosCom\ResellerClub;
 
 use GuzzleHttp\Client as Guzzle;
-use habil\ResellerClub\APIs\Actions;
-use habil\ResellerClub\APIs\Billing;
-use habil\ResellerClub\APIs\Contacts;
-use habil\ResellerClub\APIs\Customers;
-use habil\ResellerClub\APIs\Domains;
-use habil\ResellerClub\APIs\Orders;
-use habil\ResellerClub\APIs\Products;
+use HeronSantosCom\ResellerClub\APIs\Actions;
+use HeronSantosCom\ResellerClub\APIs\Billing;
+use HeronSantosCom\ResellerClub\APIs\Contacts;
+use HeronSantosCom\ResellerClub\APIs\Customers;
+use HeronSantosCom\ResellerClub\APIs\Domains;
+use HeronSantosCom\ResellerClub\APIs\Orders;
+use HeronSantosCom\ResellerClub\APIs\Products;
 
 /**
  * Class ResellerClub
  *
- * @package habil\ResellerClub
+ * @package HeronSantosCom\ResellerClub
  */
 class ResellerClub
 {
@@ -87,7 +87,7 @@ class ResellerClub
     private function _getAPI($api)
     {
         if (empty($this->apiList[$api])) {
-            $class = 'habil\\ResellerClub\\APIs\\'.$api;
+            $class = 'HeronSantosCom\\ResellerClub\\APIs\\'.$api;
             $this->apiList[$api] = new $class(
                 $this->guzzle,
                 $this->authentication

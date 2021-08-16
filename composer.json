@@ -1,11 +1,11 @@
 {
-  "name": "privyreza/resellerclub-php-api",
+  "name": "heronsantoscom/resellerclub-php-api",
   "description": "PHP SDK for ResellerClub API",
   "license": "MIT",
   "authors": [
     {
-      "name": "Siavash Habil",
-      "email": "amirkhiz@gmail.com"
+      "name": "Heron Santos",
+      "email": "heronsantos@outlook.com"
     }
   ],
   "require": {
@@ -16,7 +16,7 @@
   },
   "autoload": {
     "psr-4": {
-      "habil\\ResellerClub\\": "src/"
+      "HeronSantosCom\\ResellerClub\\": "src/"
     }
   },
   "config": {
