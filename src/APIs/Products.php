@@ -106,7 +106,6 @@ class Products
     /**
      * Gets the details of the all active product plans of the Reseller
      * 
-     * @param string $domainName
      * @param string $productKey
      *
      * @return array|Exception
@@ -115,7 +114,7 @@ class Products
      * @todo Add optional parameters
      */
     public function planDetails(
-        $productKey
+        $productKey = ''
     ) {
         return $this->get(
             'plan-details',
