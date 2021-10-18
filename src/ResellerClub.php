@@ -152,4 +152,20 @@ class ResellerClub
     {
         return $this->_getAPI('Actions');
     }
+
+    /**
+     * @return Country
+     */
+    public function country()
+    {
+        return $this->_getAPI('Country');
+    }
+
+    /**
+     * @return Currency
+     */
+    public function currency()
+    {
+        return $this->_getAPI('Currency');
+    }
 }
