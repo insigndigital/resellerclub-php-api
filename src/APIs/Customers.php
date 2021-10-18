@@ -30,11 +30,16 @@ class Customers
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/806
      */
-    public function changePassword($customerId, $newPassword)
-    {
+    public function changePassword(
+        $customerId,
+        $newPassword
+    ) {
         return $this->post(
             'change-password',
-            ['customer-id' => $customerId, 'new-passwd' => $newPassword]
+            [
+                'customer-id' => $customerId,
+                'new-passwd' => $newPassword
+            ]
         );
     }
 
@@ -49,7 +54,12 @@ class Customers
      */
     public function details($username)
     {
-        return $this->get('details', ['username' => $username]);
+        return $this->get(
+            'details',
+            [
+                'username' => $username
+            ]
+        );
     }
 
     /**
@@ -63,7 +73,12 @@ class Customers
      */
     public function detailsById($customerId)
     {
-        return $this->get('details-by-id', ['customer-id' => $customerId]);
+        return $this->get(
+            'details-by-id',
+            [
+                'customer-id' => $customerId
+            ]
+        );
     }
 
     /**
@@ -184,6 +199,11 @@ class Customers
      */
     public function tempPassword($customerId)
     {
-        return $this->get('temp-password', ['customer-id' => $customerId]);
+        return $this->get(
+            'temp-password',
+            [
+                'customer-id' => $customerId
+            ]
+        );
     }
 }

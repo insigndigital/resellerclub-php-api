@@ -32,7 +32,9 @@ class Billing
     {
         return $this->get(
             'customer-transactions',
-            ['customer-id' => $customerId]
+            [
+                'customer-id' => $customerId
+            ]
         );
     }
 
@@ -72,7 +74,8 @@ class Billing
         $transactionDateEnd = '',
         $orderBy = ''
     ) {
-        $data = $this->fillParameters(
+
+        $dataToSend = $this->fillParameters(
             [
                 'no-of-records'           => $records,
                 'page-no'                 => $page,
@@ -91,6 +94,6 @@ class Billing
             ]
         );
 
-        return $this->get('search', $data, 'customer-transactions/');
+        return $this->get('search', $dataToSend, 'customer-transactions/');
     }
 }

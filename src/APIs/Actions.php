@@ -20,6 +20,8 @@ class Actions
     protected $api = 'actions';
 
     /**
+     * Gets the Current Actions based on the criteria specified.
+     * 
      * @param array $eaqIds        Array of Integers
      * @param array $orderIds      Array of Integers
      * @param array $entityTypeIds Array of Integers
@@ -32,7 +34,7 @@ class Actions
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/908
      */
-    public function current(
+    public function searchCurrent(
         array $eaqIds = [],
         array $orderIds = [],
         array $entityTypeIds = [],
@@ -41,6 +43,7 @@ class Actions
         $noOfRecords = 10,
         $pageNo = 1
     ) {
+
         $dataToSend = $this->fillParameters(
             [
                 'no-of-records'  => $noOfRecords,
@@ -53,10 +56,15 @@ class Actions
             ]
         );
 
-        return $this->get('search-current', $dataToSend);
+        return $this->get(
+            'search-current',
+            $dataToSend
+        );
     }
 
     /**
+     * Searches the Archived Actions based on the criteria specified.
+     * 
      * @param array $eaqIds        Array of Integers
      * @param array $orderIds      Array of Integers
      * @param array $entityTypeIds Array of Integers
@@ -69,7 +77,7 @@ class Actions
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/909
      */
-    public function archived(
+    public function searchArchived(
         array $eaqIds = [],
         array $orderIds = [],
         array $entityTypeIds = [],
@@ -78,6 +86,7 @@ class Actions
         $noOfRecords = 10,
         $pageNo = 1
     ) {
+
         $dataToSend = $this->fillParameters(
             [
                 'no-of-records'  => $noOfRecords,
@@ -90,6 +99,9 @@ class Actions
             ]
         );
 
-        return $this->get('search-archived', $dataToSend);
+        return $this->get(
+            'search-archived',
+            $dataToSend
+        );
     }
 }

@@ -21,6 +21,8 @@ class Contacts
     protected $api = 'contacts';
 
     /**
+     * Adds a Contact to the domain using the details provided.
+     * 
      * @param string $name
      * @param string $company
      * @param string $email
@@ -86,6 +88,10 @@ class Contacts
     }
 
     /**
+     * Modifies the details of the specified Contact.
+     * 
+     * @deprecated This API Call will be deprecated from 1st December 2016 due to IRTP changes in the system. Modifying a Contact is no longer allowed and only New Contacts can be created and associated with a domain.
+     * 
      * @param int    $contactId
      * @param string $name
      * @param string $company
@@ -146,6 +152,8 @@ class Contacts
     }
 
     /**
+     * Gets the details for the specified Contact.
+     * 
      * @param int $contactId
      *
      * @return array|Exception
@@ -154,7 +162,12 @@ class Contacts
      */
     public function getContact($contactId)
     {
-        return $this->get('details', ['contact-id' => $contactId]);
+        return $this->get(
+            'details',
+            [
+                'contact-id' => $contactId
+            ]
+        );
     }
 
     /**
@@ -183,7 +196,8 @@ class Contacts
         $email = '',
         $type = ''
     ) {
-        $data = $this->fillParameters(
+
+        $dataToSend = $this->fillParameters(
             [
                 'customer-id'   => $customerId,
                 'no-of-records' => $records,
@@ -197,7 +211,7 @@ class Contacts
             ]
         );
 
-        return $this->get('search', $data);
+        return $this->get('search', $dataToSend);
     }
 
     /**
@@ -208,11 +222,16 @@ class Contacts
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/794
      */
-    public function getDefault($customerId, $type)
-    {
+    public function getDefault(
+        $customerId,
+        $type
+    ) {
         return $this->post(
             'default',
-            ['customer-id' => $customerId, 'type' => $type]
+            [
+                'customer-id' => $customerId,
+                'type' => $type
+            ]
         );
     }
 
@@ -224,11 +243,15 @@ class Contacts
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/3071
      */
-    public function setDetails($contactId, $attributes)
-    {
+    public function setDetails(
+        $contactId,
+        $attributes
+    ) {
         return $this->post(
             'set-details',
-            ['contact-id' => $contactId] + $this->processAttributes($attributes)
+            [
+                'contact-id' => $contactId
+            ] + $this->processAttributes($attributes)
         );
     }
 
@@ -241,7 +264,12 @@ class Contacts
      */
     public function delete($contactId)
     {
-        return $this->post('delete', ['contact-id' => $contactId]);
+        return $this->post(
+            'delete',
+            [
+                'contact-id' => $contactId
+            ]
+        );
     }
 
     /**
@@ -314,7 +342,13 @@ class Contacts
      */
     public function getSponsors($customerId)
     {
-        return $this->get('sponsors', ['customer-id' => $customerId], 'coop');
+        return $this->get(
+            'sponsors',
+            [
+                'customer-id' => $customerId
+            ],
+            'coop'
+        );
     }
 
     /**
@@ -337,8 +371,7 @@ class Contacts
      */
     public function validateContact(
         $contactId,
-        $check
-        = [
+        $check = [
             'CED_ASIAN_COUNTRY',
             'CED_DETAILS',
             'CPR',
@@ -350,7 +383,10 @@ class Contacts
     ) {
         return $this->get(
             'validate-registrant',
-            ['contact-id' => $contactId, 'eligibility-criteria' => $check]
+            [
+                'contact-id' => $contactId,
+                'eligibility-criteria' => $check
+            ]
         );
     }
 }

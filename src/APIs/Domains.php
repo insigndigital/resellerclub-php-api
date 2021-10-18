@@ -209,23 +209,24 @@ class Domains
         $protectPrivacy = false,
         $additional = []
     ) {
-        $params = [
-                'domain-name'        => $domain,
-                'years'              => $years,
-                'ns'                 => $ns,
-                'customer-id'        => $customer,
-                'reg-contact-id'     => $reg,
-                'admin-contact-id'   => $admin,
-                'tech-contact-id'    => $tech,
-                'billing-contact-id' => $billing,
-                'invoice-option'     => $invoice,
-                'purchase-privacy'   => $purchasePrivacy,
-                'protect-privacy'    => $protectPrivacy,
-            ] + $this->processAttributes($additional);
 
-        $params = http_build_query($params);
+        $dataToSend = [
+            'domain-name'        => $domain,
+            'years'              => $years,
+            'ns'                 => $ns,
+            'customer-id'        => $customer,
+            'reg-contact-id'     => $reg,
+            'admin-contact-id'   => $admin,
+            'tech-contact-id'    => $tech,
+            'billing-contact-id' => $billing,
+            'invoice-option'     => $invoice,
+            'purchase-privacy'   => $purchasePrivacy,
+            'protect-privacy'    => $protectPrivacy,
+        ] + $this->processAttributes($additional);
 
-        return $this->postArgString('register', $params);
+        $dataToSend = http_build_query($dataToSend);
+
+        return $this->postArgString('register', $dataToSend);
     }
 
     /**
@@ -382,20 +383,21 @@ class Domains
         $expireStart = '',
         $expireEnd = ''
     ) {
+
         $dates = [];
-        if ( ! empty($createdStart)) {
+        if (!empty($createdStart)) {
             $dates['creation-date-start'] = strtotime($createdStart);
         }
 
-        if ( ! empty($createdEnd)) {
+        if (!empty($createdEnd)) {
             $dates['creation-date-end'] = strtotime($createdEnd);
         }
 
-        if ( ! empty($expireStart)) {
+        if (!empty($expireStart)) {
             $dates['expiry-date-start'] = strtotime($expireStart);
         }
 
-        if ( ! empty($expireEnd)) {
+        if (!empty($expireEnd)) {
             $dates['expiry-date-end'] = strtotime($expireEnd);
         }
 
@@ -428,7 +430,9 @@ class Domains
     {
         return $this->get(
             'customer-default-ns',
-            ['customer-id' => $customerId]
+            [
+                'customer-id' => $customerId
+            ]
         );
     }
 
@@ -441,7 +445,12 @@ class Domains
      */
     public function getOrderId($domain)
     {
-        return $this->get('orderid', ['domain-name' => $domain]);
+        return $this->get(
+            'orderid',
+            [
+                'domain-name' => $domain
+            ]
+        );
     }
 
     /**
@@ -452,8 +461,10 @@ class Domains
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/770
      */
-    public function getDetailsByOrderId($orderId, $options = ['All'])
-    {
+    public function getDetailsByOrderId(
+        $orderId,
+        $options = ['All']
+    ) {
         return $this->get(
             'details',
             [
@@ -471,8 +482,10 @@ class Domains
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/1755
      */
-    public function getDetailsByDomain($domain, $options = ['All'])
-    {
+    public function getDetailsByDomain(
+        $domain,
+        $options = ['All']
+    ) {
         return $this->get(
             'details-by-name',
             [
@@ -490,8 +503,10 @@ class Domains
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/776
      */
-    public function modifyNameServers($orderId, $ns)
-    {
+    public function modifyNameServers(
+        $orderId,
+        $ns
+    ) {
         return $this->postArgString(
             'modify-ns',
             http_build_query(
@@ -512,8 +527,11 @@ class Domains
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/780
      */
-    public function addChildNameServer($orderId, $cns, $ip)
-    {
+    public function addChildNameServer(
+        $orderId,
+        $cns,
+        $ip
+    ) {
         return $this->post(
             'add-cns',
             [
@@ -533,8 +551,11 @@ class Domains
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/781
      */
-    public function renameChildNameServer($orderId, $oldCNS, $newCNS)
-    {
+    public function renameChildNameServer(
+        $orderId,
+        $oldCNS,
+        $newCNS
+    ) {
         return $this->post(
             'modify-cns-name',
             [
@@ -555,8 +576,12 @@ class Domains
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/782
      */
-    public function modifyChildNameServer($orderId, $cns, $oldIP, $newIP)
-    {
+    public function modifyChildNameServer(
+        $orderId,
+        $cns,
+        $oldIP,
+        $newIP
+    ) {
         return $this->post(
             'modify-cns-ip',
             [
@@ -577,8 +602,11 @@ class Domains
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/934
      */
-    public function deleteChildNameServer($orderId, $cns, $ip)
-    {
+    public function deleteChildNameServer(
+        $orderId,
+        $cns,
+        $ip
+    ) {
         return $this->post(
             'delete-cns-ip',
             [
@@ -608,6 +636,7 @@ class Domains
         $billingContactId,
         $skipIRTP = false
     ) {
+
         $params = [
             'order-id'           => $orderId,
             'reg-contact-id'     => $regContactId,
@@ -631,8 +660,10 @@ class Domains
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/2085
      */
-    public function purchasePrivacy($orderId, $invoiceOption)
-    {
+    public function purchasePrivacy(
+        $orderId,
+        $invoiceOption
+    ) {
         return $this->post(
             'purchase-privacy',
             [
@@ -651,8 +682,11 @@ class Domains
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/778
      */
-    public function modifyPrivacyProtection($orderId, $protectPrivacy, $reason)
-    {
+    public function modifyPrivacyProtection(
+        $orderId,
+        $protectPrivacy,
+        $reason
+    ) {
         return $this->post(
             'modify-privacy-protection',
             [
@@ -671,8 +705,10 @@ class Domains
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/779
      */
-    public function modifyAuthCode($orderId, $authCode)
-    {
+    public function modifyAuthCode(
+        $orderId,
+        $authCode
+    ) {
         return $this->post(
             'modify-auth-code',
             [
@@ -691,7 +727,12 @@ class Domains
      */
     public function enableTheftProtection($orderId)
     {
-        return $this->post('enable-theft-protection', ['order-id' => $orderId]);
+        return $this->post(
+            'enable-theft-protection',
+            [
+                'order-id' => $orderId
+            ]
+        );
     }
 
     /**
@@ -705,7 +746,9 @@ class Domains
     {
         return $this->post(
             'disable-theft-protection',
-            ['order-id' => $orderId]
+            [
+                'order-id' => $orderId
+            ]
         );
     }
 
@@ -718,7 +761,12 @@ class Domains
      */
     public function getLocks($orderId)
     {
-        return $this->get('locks', ['order-id' => $orderId]);
+        return $this->get(
+            'locks',
+            [
+                'order-id' => $orderId
+            ]
+        );
     }
 
     /**
@@ -729,7 +777,13 @@ class Domains
      */
     public function getCthDetails($orderId)
     {
-        return $this->get('cth-details', ['order-id' => $orderId], 'tel/');
+        return $this->get(
+            'cth-details',
+            [
+                'order-id' => $orderId
+            ],
+            'tel/'
+        );
     }
 
     /**
@@ -741,8 +795,11 @@ class Domains
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/773
      */
-    public function modifyTelWhoisPreference($orderId, $type, $publish)
-    {
+    public function modifyTelWhoisPreference(
+        $orderId,
+        $type,
+        $publish
+    ) {
         return $this->post(
             'modify-whois-pref',
             [
@@ -763,7 +820,12 @@ class Domains
      */
     public function resendRfa($orderId)
     {
-        return $this->post('resend-rfa', ['order-id' => $orderId]);
+        return $this->post(
+            'resend-rfa',
+            [
+                'order-id' => $orderId
+            ]
+        );
     }
 
     /**
@@ -775,11 +837,16 @@ class Domains
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/785
      */
-    public function releaseUk($orderId, $tag)
-    {
+    public function releaseUk(
+        $orderId,
+        $tag
+    ) {
         return $this->post(
             'release',
-            ['order-id' => $orderId, 'new-tag' => $tag],
+            [
+                'order-id' => $orderId,
+                'new-tag' => $tag
+            ],
             'uk/'
         );
     }
@@ -793,7 +860,12 @@ class Domains
      */
     public function cancelTransfer($orderId)
     {
-        return $this->post('cancel-transfer', ['order-id' => $orderId]);
+        return $this->post(
+            'cancel-transfer',
+            [
+                'order-id' => $orderId
+            ]
+        );
     }
 
     /**
@@ -805,7 +877,12 @@ class Domains
      */
     public function delete($orderId)
     {
-        return $this->post('delete', ['order-id' => $orderId]);
+        return $this->post(
+            'delete',
+            [
+                'order-id' => $orderId
+            ]
+        );
     }
 
     /**
@@ -816,11 +893,16 @@ class Domains
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/760
      */
-    public function restore($orderId, $invoice)
-    {
+    public function restore(
+        $orderId,
+        $invoice
+    ) {
         return $this->post(
             'restore',
-            ['order-id' => $orderId, 'invoice-option' => $invoice]
+            [
+                'order-id' => $orderId,
+                'invoice-option' => $invoice
+            ]
         );
     }
 
@@ -833,7 +915,13 @@ class Domains
      */
     public function recheckNsDe($orderId)
     {
-        return $this->post('recheck-ns', ['order-id' => $orderId], 'de/');
+        return $this->post(
+            'recheck-ns',
+            [
+                'order-id' => $orderId
+            ],
+            'de/'
+        );
     }
 
     /**
@@ -844,11 +932,16 @@ class Domains
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/1309
      */
-    public function setXXXAssociation($orderId, $id = '')
-    {
+    public function setXXXAssociation(
+        $orderId,
+        $id = ''
+    ) {
         return $this->post(
             'association-details',
-            ['order-id' => $orderId, 'association-id' => $id],
+            [
+                'order-id' => $orderId,
+                'association-id' => $id
+            ],
             'dotxxx/'
         );
     }
@@ -863,7 +956,9 @@ class Domains
     {
         return $this->post(
             'association-details',
-            ['order-id' => $orderId],
+            [
+                'order-id' => $orderId
+            ],
             'dotxxx/'
         );
     }
@@ -876,11 +971,19 @@ class Domains
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/1910
      */
-    public function addDNSSEC($orderId, $attributes)
-    {
+    public function addDNSSEC(
+        $orderId,
+        $attributes
+    ) {
+
         $attributes = $this->processAttributes($attributes);
 
-        return $this->post('add-dnssec', ['order-id' => $orderId] + $attributes);
+        return $this->post(
+            'add-dnssec',
+            [
+                'order-id' => $orderId
+            ] + $attributes
+        );
     }
 
     /**
@@ -891,11 +994,18 @@ class Domains
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/1911
      */
-    public function delDNSSEC($orderId, $attributes)
-    {
+    public function delDNSSEC(
+        $orderId,
+        $attributes
+    ) {
         $attributes = $this->processAttributes($attributes);
 
-        return $this->post('del-dnssec', ['order-id' => $orderId] + $attributes);
+        return $this->post(
+            'del-dnssec',
+            [
+                'order-id' => $orderId
+            ] + $attributes
+        );
     }
 
     /**
@@ -909,7 +1019,9 @@ class Domains
     {
         return $this->post(
             'resend-verification',
-            ['order-id' => $orderId],
+            [
+                'order-id' => $orderId
+            ],
             'raa/'
         );
     }
@@ -922,11 +1034,16 @@ class Domains
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/2012
      */
-    public function addWishList($customerId, $domains)
-    {
+    public function addWishList(
+        $customerId,
+        $domains
+    ) {
         return $this->post(
             'add',
-            ['customerid' => $customerId, 'domain' => $domains],
+            [
+                'customerid' => $customerId,
+                'domain' => $domains
+            ],
             'preordering/'
         );
     }
@@ -939,11 +1056,16 @@ class Domains
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/node/2013
      */
-    public function deleteWishList($customerId, $domain)
-    {
+    public function deleteWishList(
+        $customerId,
+        $domain
+    ) {
         return $this->post(
             'delete',
-            ['customerid' => $customerId, 'domain' => $domain],
+            [
+                'customerid' => $customerId,
+                'domain' => $domain
+            ],
             'preordering/'
         );
     }
@@ -972,6 +1094,7 @@ class Domains
         $createdStart = false,
         $createdEnd = false
     ) {
+
         $data = [
             'no-of-records' => $records,
             'page-no'       => $page,
@@ -985,11 +1108,11 @@ class Domains
             $data['resellerId'] = $resellerId;
         }
 
-        if ( ! empty($slds)) {
+        if (!empty($slds)) {
             $data['domain'] = $slds;
         }
 
-        if ( ! empty($tlds)) {
+        if (!empty($tlds)) {
             $data['tld'] = $tlds;
         }
 
@@ -1015,7 +1138,9 @@ class Domains
     {
         return $this->get(
             'fetchtldlist',
-            ['category' => $category],
+            [
+                'category' => $category
+            ],
             'preordering/'
         );
     }

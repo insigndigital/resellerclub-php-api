@@ -28,8 +28,10 @@ class Orders
      * @throws Exception
      * @link https://manage.logicboxes.com/kb/answer/1077
      */
-    public function suspend($orderId, $reason)
-    {
+    public function suspend(
+        $orderId,
+        $reason
+    ) {
         return $this->post(
             'suspend',
             [
@@ -48,8 +50,10 @@ class Orders
      * @link https://manage.logicboxes.com/kb/answer/1078
      * @todo "reason" parameter does not exist in the documents.
      */
-    public function unsuspend($orderId, $reason)
-    {
+    public function unsuspend(
+        $orderId,
+        $reason
+    ) {
         return $this->post(
             'unsuspend',
             [
