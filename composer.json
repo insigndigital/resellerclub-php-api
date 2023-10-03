@@ -10,7 +10,7 @@
   ],
   "require": {
     "ext-curl": "*",
-    "guzzlehttp/guzzle": "~7",
+    "guzzlehttp/guzzle": "^7.8",
     "ext-simplexml": "*",
     "ext-json": "*"
   },
