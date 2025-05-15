@@ -1,14 +1,14 @@
 <?php
 
-namespace HeronSantosCom\ResellerClub\APIs;
+namespace ResellerClub\APIs;
 
 use Exception;
-use HeronSantosCom\ResellerClub\Helper;
+use ResellerClub\Helper;
 
 /**
  * Class Domains
  *
- * @package HeronSantosCom\ResellerClub\APIs
+ * @package ResellerClub\APIs
  * @todo    Check all the APIs parameters there are some changes.
  */
 class Domains

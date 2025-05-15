@@ -1,6 +1,6 @@
 <?php
 
-namespace HeronSantosCom\ResellerClub;
+namespace ResellerClub;
 
 use Exception;
 use GuzzleHttp\Client as Guzzle;
@@ -13,7 +13,7 @@ use SimpleXMLElement;
 
 /**
  * Trait Helper
- * @package HeronSantosCom\ResellerClub
+ * @package ResellerClub
  */
 trait Helper
 {

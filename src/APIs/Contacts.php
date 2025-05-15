@@ -1,15 +1,15 @@
 <?php
 
-namespace HeronSantosCom\ResellerClub\APIs;
+namespace ResellerClub\APIs;
 
 use Exception;
-use HeronSantosCom\ResellerClub\Helper;
+use ResellerClub\Helper;
 use SimpleXMLElement;
 
 /**
  * Class Contacts
  *
- * @package HeronSantosCom\ResellerClub\APIs
+ * @package ResellerClub\APIs
  */
 class Contacts
 {

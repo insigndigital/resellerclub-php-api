@@ -1,14 +1,14 @@
 <?php
 
-namespace HeronSantosCom\ResellerClub\APIs;
+namespace ResellerClub\APIs;
 
 use Exception;
-use HeronSantosCom\ResellerClub\Helper;
+use ResellerClub\Helper;
 
 /**
  * Class Country
  *
- * @package HeronSantosCom\ResellerClub\APIs
+ * @package ResellerClub\APIs
  */
 class Country
 {

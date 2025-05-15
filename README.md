@@ -28,7 +28,7 @@ Available API requests:
 
 ## Usage Example
 ```php
-use HeronSantosCom\ResellerClub\ResellerClub;
+use ResellerClub\ResellerClub;
 
 $resellerClub = new ResellerClub('<userId>', '<apiKey>');
 $resellerClub->domains()->available(['google', 'example'], ['com', 'net']);
