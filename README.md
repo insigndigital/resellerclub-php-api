@@ -13,8 +13,17 @@ Available API requests:
 * Products
 
 # Installation
+`composer.json`:
 ```
-composer require insigndigital/resellerclub-php-api
+"require": {
+    "insigndigital/resellerclub-php-api": "dev-master"
+},
+"repositories": [
+    {
+        "type": "vcs",
+        "url": "https://github.com/insigndigital/resellerclub-php-api.git"
+    }
+]
 ```
 
 ## Usage Example
