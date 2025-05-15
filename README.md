@@ -13,17 +13,8 @@ Available API requests:
 * Products
 
 # Installation
-`composer.json`:
 ```
-"require": {
-    "heronsantoscom/resellerclub-php-api": "dev-master"
-},
-"repositories": [
-    {
-        "type": "vcs",
-        "url": "https://github.com/HeronSantosCom/resellerclub-php-api.git"
-    }
-]
+composer require insigndigital/resellerclub-php-api
 ```
 
 ## Usage Example
