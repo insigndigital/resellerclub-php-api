@@ -10,3 +10,4 @@ namespace ResellerClub\Exceptions;
 class AuthenticationException extends ResellerClubApiException
 {
 }
+

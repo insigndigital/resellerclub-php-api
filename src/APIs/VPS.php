@@ -117,3 +117,4 @@ class VPS
         return $this->post('delete', ['order-id' => $orderId]);
     }
 }
+

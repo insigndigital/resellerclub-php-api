@@ -37,3 +37,4 @@ class ResellerClubApiException extends RuntimeException
         return $this->responseData;
     }
 }
+

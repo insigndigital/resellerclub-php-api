@@ -39,3 +39,4 @@ class ResellerClubTest extends TestCase
         $this->assertSame($first, $second);
     }
 }
+

@@ -254,3 +254,4 @@ class Hosting
         return $this->post('delete', ['order-id' => $orderId]);
     }
 }
+

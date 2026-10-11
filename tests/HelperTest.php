@@ -69,3 +69,4 @@ class HelperTest extends TestCase
         $products->customerPrice();
     }
 }
+

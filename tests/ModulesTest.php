@@ -74,3 +74,4 @@ class ModulesTest extends TestCase
         $this->assertEquals('Success', $res['status']);
     }
 }
+
