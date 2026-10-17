@@ -52,6 +52,11 @@ class ResellerClub
         float $timeout = 30.0,
         string $bindIp = ''
     ) {
+        $appEnv = getenv('ENVIRONMENT') ?: (isset($_ENV['ENVIRONMENT']) ? $_ENV['ENVIRONMENT'] : null);
+        if ($appEnv !== null && $appEnv !== 'production') {
+            $testMode = true;
+        }
+
         $this->authentication = [
             'auth-userid' => (string) $userId,
             'api-key' => $apiKey,
